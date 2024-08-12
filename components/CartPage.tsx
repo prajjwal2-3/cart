@@ -9,6 +9,9 @@ import { Products } from "@/data/products";
 import { Card } from '@/components/ui/card';
 
 export default function CartPage() {
+    const [couponCode, setCouponCode] = useState("");
+  const [showAlert, setShowAlert] = useState(false);
+  const [isApplied, setIsApplied] = useState(false);
   const cart = useCartStore();
 
   const cartProducts = cart.products
@@ -17,9 +20,7 @@ export default function CartPage() {
 if(cartProducts.length===0){
     return <div className="p-24 text-center">Nothing to show here. Add some Products to cart first.</div>
 }
-  const [couponCode, setCouponCode] = useState("");
-  const [showAlert, setShowAlert] = useState(false);
-  const [isApplied, setIsApplied] = useState(false);
+  
 
   const handleCouponCodeChange = (e: { target: { value: SetStateAction<string>; }; }) => {
     setCouponCode(e.target.value);
@@ -90,7 +91,7 @@ if(cartProducts.length===0){
         </div>
         {showAlert && (
           <div className="bg-red-100 border-l-4 border-red-500 text-red-700 p-4 mb-4" role="alert">
-            <p>Invalid coupon code. Try using "HIREME".</p>
+            <p>Invalid coupon code. Try using &quot;HIREME&quot;.</p>
           </div>
         )}
         {isApplied && (
