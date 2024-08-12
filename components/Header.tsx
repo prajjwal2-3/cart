@@ -10,12 +10,13 @@ import {
 } from '@/components/ui/dropdown-menu';
 import { Badge } from '@/components/ui/badge';
 import { ModeToggle } from './DarkModeToggle';
+import CartCount from './CartCount';
 
 interface HeaderProps {
   cartItemCount: number;
 }
 
-const Header: React.FC<HeaderProps> = ({ cartItemCount }) => {
+const Header: React.FC = () => {
   return (
     <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
       <div className="container flex h-14 items-center">
@@ -71,12 +72,7 @@ const Header: React.FC<HeaderProps> = ({ cartItemCount }) => {
        
         <div className="flex flex-1 items-center justify-end space-x-4">
           <nav className="flex items-center  gap-4 ">
-            <Button variant="ghost" size="icon" className="relative">
-              <ShoppingCart className="h-5 w-5" />
-              <Badge variant="secondary" className="absolute -top-2 -right-2">
-                {cartItemCount?cartItemCount:0}
-              </Badge>
-            </Button>
+            <CartCount/>
             <ModeToggle />
           </nav>
         </div>

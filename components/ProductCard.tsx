@@ -2,6 +2,7 @@ import React from 'react';
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import Caraousal from './Caraousal';
+import AddtoCart from './AddtoCart';
 
 interface Category {
   id: number;
@@ -46,9 +47,7 @@ const ProductCard: React.FC<{ product: Product }> = ({ product }) => {
         </div>
       </CardContent>
       <CardFooter>
-        <button className="w-full bg-blue-500 text-white py-2 rounded hover:bg-blue-600 transition-colors dark:bg-blue-600 dark:hover:bg-blue-700">
-          Add to Cart
-        </button>
+        <AddtoCart id={product.id}/>
       </CardFooter>
     </Card>
   );
