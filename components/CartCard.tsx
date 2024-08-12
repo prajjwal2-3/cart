@@ -4,11 +4,13 @@ import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/componen
 import { Button } from './ui/button';
 import { Separator } from './ui/separator';
 import Caraousal from './Caraousal';
+import useCartStore from '@/store/cart';
 interface CartCardProps {
   data: Product;
 }
 
 export default function CartCard({ data }: CartCardProps) {
+    const cart = useCartStore()
   return (
    
     <Card className="mb-8  lg:flex  justify-center  items-center">
@@ -33,7 +35,9 @@ export default function CartCard({ data }: CartCardProps) {
             +
           </Button>
         </div>
-        <Button variant="outline" className="ml-4">
+        <Button variant="outline" className="ml-4" onClick={()=>{
+            cart.removeProduct(data.id)
+        }}>
           Remove
         </Button>
       </div>
