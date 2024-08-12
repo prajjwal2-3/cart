@@ -64,7 +64,7 @@ if(cartProducts.length===0){
           </div>
           <div className="flex justify-between">
             <p className="text-gray-600">Taxes:</p>
-            <p className="font-semibold text-green-400">I ain't nirmala tai</p>
+            <p className="font-semibold text-green-400">I ain&lsquo;t nirmala tai</p>
           </div>
           {
             isApplied && (
