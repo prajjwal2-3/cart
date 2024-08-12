@@ -7,7 +7,7 @@ import { Button } from "./ui/button";
 import CartCard from "./CartCard";
 import { Products } from "@/data/products";
 import { Card } from '@/components/ui/card';
-
+import Empty from "./Empty";
 export default function CartPage() {
     const [couponCode, setCouponCode] = useState("");
   const [showAlert, setShowAlert] = useState(false);
@@ -18,7 +18,7 @@ export default function CartPage() {
     .map((cartItem) => Products.find((product) => product.id === cartItem.id))
     .filter((product) => product !== undefined);
 if(cartProducts.length===0){
-    return <div className="p-24 text-center">Nothing to show here. Add some Products to cart first.</div>
+    return <Empty/>
 }
   
 
