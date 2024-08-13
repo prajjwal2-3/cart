@@ -35,7 +35,7 @@ const Header: React.FC = () => {
           </DropdownMenuTrigger>
           <DropdownMenuContent align="start" className="w-[200px]">
             <DropdownMenuItem>
-              <a href="#">Home</a>
+              <Link href="/">Home</Link>
             </DropdownMenuItem>
             <DropdownMenuItem>
               <a href="#">Products</a>

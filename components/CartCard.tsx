@@ -1,6 +1,6 @@
 import React from 'react'
 import { Product } from '@/types/basic'
-import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
+import { Card, CardContent, CardHeader } from '@/components/ui/card';
 import { Button } from './ui/button';
 import { Separator } from './ui/separator';
 import Caraousal from './Caraousal';
@@ -8,12 +8,11 @@ import useCartStore from '@/store/cart';
 interface CartCardProps {
   data: Product;
 }
-
 export default function CartCard({ data }: CartCardProps) {
     const cart = useCartStore()
   return (
    
-    <Card className="mb-8  lg:flex  justify-center  items-center">
+  <Card className="mb-8  lg:flex  justify-center  items-center">
         <Caraousal product={data}/>
     <section className='lg:w-9/12'>
     <CardHeader>
