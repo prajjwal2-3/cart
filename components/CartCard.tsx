@@ -23,6 +23,7 @@ export default function CartCard({ data }: CartCardProps) {
         <p className="text-sm mb-2 line-clamp-2 w-11/12">{data.description}</p>
         <p className="text-xl font-bold">${data.price}</p>
       </div>
+      
       <Separator className="my-4" />
       <div className="flex justify-between items-center">
         <div className="flex items-center">
