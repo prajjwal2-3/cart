@@ -8,19 +8,21 @@ import CartCard from "./CartCard";
 import { Products } from "@/data/products";
 import { Card } from '@/components/ui/card';
 import Empty from "./Empty";
+
 export default function CartPage() {
-    const [couponCode, setCouponCode] = useState("");
+  const [couponCode, setCouponCode] = useState("");
   const [showAlert, setShowAlert] = useState(false);
   const [isApplied, setIsApplied] = useState(false);
   const cart = useCartStore();
 
-  const cartProducts = cart.products
-    .map((cartItem) => Products.find((product) => product.id === cartItem.id))
-    .filter((product) => product !== undefined);
-if(cartProducts.length===0){
-    return <Empty/>
-}
-  
+  const cartProducts = cart.products.map((cartItem) => {
+    const product = Products.find((p) => p.id === cartItem.id);
+    return product ? { ...product, quantity: cartItem.quantity } : undefined;
+  }).filter((product): product is NonNullable<typeof product> => product !== undefined);
+
+  if (cartProducts.length === 0) {
+    return <Empty />;
+  }
 
   const handleCouponCodeChange = (e: { target: { value: SetStateAction<string>; }; }) => {
     setCouponCode(e.target.value);
@@ -31,14 +33,13 @@ if(cartProducts.length===0){
       setShowAlert(false);
       setIsApplied(true);
     } else {
-        setIsApplied(false);
+      setIsApplied(false);
       setShowAlert(true);
     }
   };
 
-  
   const calculateTotalPrice = () => {
-    return cartProducts.reduce((total, product) => total + product.price, 0);
+    return cartProducts.reduce((total, product) => total + product.price * product.quantity, 0);
   };
 
   const subtotal = calculateTotalPrice();
@@ -67,14 +68,12 @@ if(cartProducts.length===0){
             <p className="text-gray-600">Taxes:</p>
             <p className="font-semibold text-green-400">I ain&lsquo;t nirmala tai</p>
           </div>
-          {
-            isApplied && (
-                <div className="flex justify-between">
-            <p className="text-gray-600">Discount:</p>
-            <p className="font-semibold ">-$10</p>
-          </div>
-            )
-          }
+          {isApplied && (
+            <div className="flex justify-between">
+              <p className="text-gray-600">Discount:</p>
+              <p className="font-semibold ">-$10</p>
+            </div>
+          )}
         </div>
         <div className="flex justify-between flex-col gap-3 mb-4">
           <div className="flex w-full items-center">

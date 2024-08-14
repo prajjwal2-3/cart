@@ -10,6 +10,19 @@ interface CartCardProps {
 }
 export default function CartCard({ data }: CartCardProps) {
     const cart = useCartStore()
+    const quantity = cart.getProductQuantity(data.id)
+
+    const handleIncrement = () => {
+      cart.addProduct(data.id)
+    }
+  
+    const handleDecrement = () => {
+      if (quantity > 1) {
+        cart.decreaseQuantity(data.id)
+      } else {
+        cart.removeProduct(data.id)
+      }
+    }
   return (
    
   <Card className="mb-8  lg:flex  justify-center  items-center">
@@ -23,18 +36,18 @@ export default function CartCard({ data }: CartCardProps) {
         <p className="text-sm mb-2 line-clamp-2 w-11/12">{data.description}</p>
         <p className="text-xl font-bold">${data.price}</p>
       </div>
-      
+
       <Separator className="my-4" />
       <div className="flex justify-between items-center">
-        <div className="flex items-center">
-          <Button variant="ghost" className="mr-2">
-            -
-          </Button>
-          <span className="text-lg font-bold">1</span>
-          <Button variant="ghost" className="ml-2">
-            +
-          </Button>
-        </div>
+      <div className="flex items-center">
+              <Button variant="ghost" className="mr-2" onClick={handleDecrement}>
+                -
+              </Button>
+              <span className="text-lg font-bold">{quantity}</span>
+              <Button variant="ghost" className="ml-2" onClick={handleIncrement}>
+                +
+              </Button>
+            </div>
         <Button variant="outline" className="ml-4" onClick={()=>{
             cart.removeProduct(data.id)
         }}>
