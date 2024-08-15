@@ -8,13 +8,15 @@ import CartCard from "./CartCard";
 import { Products } from "@/data/products";
 import { Card } from '@/components/ui/card';
 import Empty from "./Empty";
-
+import { useRouter } from "next/navigation";
+import { useToast } from "./ui/use-toast";
 export default function CartPage() {
   const [couponCode, setCouponCode] = useState("");
   const [showAlert, setShowAlert] = useState(false);
   const [isApplied, setIsApplied] = useState(false);
   const cart = useCartStore();
-
+  const router = useRouter()
+  const {toast} = useToast()
   const cartProducts = cart.products.map((cartItem) => {
     const product = Products.find((p) => p.id === cartItem.id);
     return product ? { ...product, quantity: cartItem.quantity } : undefined;
@@ -98,9 +100,19 @@ export default function CartPage() {
             <p>You Saved $10.</p>
           </div>
         )}
+       
         <div className="flex justify-end lg:mt-8">
-          <Button className="px-8 py-4 text-lg font-bold">Checkout</Button>
+          <Button className="px-8 py-4 text-lg font-bold" onClick={()=>{
+            cart.emptyCart()
+            router.push('/')
+            toast({
+              title: "Shopping Complete",
+              description: "Thank you for shopping with SpaceX. You are off to MARS now 🚀🚀",
+            
+            })
+          }}>Checkout</Button>
         </div>
+        
       </Card>
     </div>
   );

@@ -4,7 +4,7 @@ import "./globals.css";
 import { ThemeProvider } from "@/providers/theme-provider";
 import { ModeToggle } from "@/components/DarkModeToggle";
 import Header from "@/components/Header";
-
+import { Toaster } from "@/components/ui/toaster";
 const inter = DM_Sans({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
@@ -32,6 +32,7 @@ export default function RootLayout({
           >
              <Header/>
             {children}
+            <Toaster />
           </ThemeProvider>
         </body>
       </html>
